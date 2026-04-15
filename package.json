@@ -21,8 +21,11 @@
     }
   },
   "dependencies": {
+    "ffmpeg-static": "latest",
+    "fluent-ffmpeg": "latest"
+  },
+  "devDependencies": {
     "electron": "latest",
-    "ffmpeg-static": "^latest",
-    "fluent-ffmpeg": "^latest"
+    "electron-builder": "^26.8.1"
   }
 }
