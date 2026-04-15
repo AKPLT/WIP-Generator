@@ -4,31 +4,29 @@
     <meta charset="UTF-8" />
     <title>WIP Generator</title>
     <style>
-      /* --- カッコよくするためのCSS (Cyber/Dark Theme) --- */
-
       /* 全体のフォントと背景 */
       body {
         font-family:
           "Consolas", "Monaco", "Courier New", monospace; /* エンジニアライクな等幅フォント */
-        background-color: #08090a; /* ほぼ黒 */
-        color: #d1d1d1; /* キツくないライトグレー */
+        background-color: #08090a;
+        color: #d1d1d1;
         margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         overflow: hidden;
-        letter-spacing: 1px; /* 文字間隔を広げてシャープに */
+        letter-spacing: 1px;
       }
 
       /* メインのコンテナ */
       .container {
-        background: rgba(20, 22, 25, 0.8); /* 半透明の黒 */
-        backdrop-filter: blur(10px); /* 背景をぼかすグラスモーフィズム */
+        background: rgba(20, 22, 25, 0.8);
+        backdrop-filter: blur(10px);
         padding: 30px;
-        border-radius: 4px; /* エッジを鋭く、わずかに丸める */
-        border: 1px solid rgba(0, 255, 255, 0.1); /* うっすらとしたサイアンの枠線 */
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* 深い影 */
+        border-radius: 4px;
+        border: 1px solid rgba(0, 255, 255, 0.1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         width: 450px;
         text-align: center;
         transition: all 0.3s ease;
@@ -43,11 +41,7 @@
         left: 0;
         width: 100%;
         height: 2px;
-        background: linear-gradient(
-          90deg,
-          #00ffff,
-          #ff00ff
-        ); /* サイアンからマゼンタへのグラデーション */
+        background: linear-gradient(90deg, #00ffff, #ff00ff);
         border-radius: 4px 4px 0 0;
       }
 
@@ -55,15 +49,14 @@
       h3 {
         margin-top: 10px;
         margin-bottom: 5px;
-        color: #00ffff; /* ネオンサイアン */
+        color: #00ffff;
         font-size: 1.2em;
-        text-transform: uppercase; /* 大文字に統一 */
-        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7); /* グロー効果 */
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
       }
 
-      /* ドラッグ&ドロップゾーン */
       .box {
-        border: 1px solid rgba(0, 255, 255, 0.2); /* 薄い点線 */
+        border: 1px solid rgba(0, 255, 255, 0.2);
         background-color: rgba(0, 0, 0, 0.3);
         padding: 50px 20px;
         margin: 20px 0;
@@ -75,7 +68,6 @@
         text-transform: uppercase;
       }
 
-      /* ファイルが乗ったときのエフェクト */
       .box.hover {
         border-color: #00ffff;
         background-color: rgba(0, 255, 255, 0.05);
@@ -83,21 +75,19 @@
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
       }
 
-      /* 選択中のファイル名表示 */
       #status-file {
         margin-top: 15px;
         color: #fff;
         font-size: 0.8em;
-        word-wrap: break-word; /* 長い名前対策 */
-        border-left: 2px solid #ff00ff; /* マゼンタのアクセントライン */
+        word-wrap: break-word;
+        border-left: 2px solid #ff00ff;
         padding-left: 10px;
         text-align: left;
         display: inline-block;
         max-width: 90%;
-        visibility: hidden; /* 最初は隠す */
+        visibility: hidden;
       }
 
-      /* セレクトボックスとボタンのラッパー */
       .controls {
         display: flex;
         flex-direction: column;
@@ -106,7 +96,6 @@
         margin-top: 30px;
       }
 
-      /* 各コントロールの行 */
       .control-row {
         display: flex;
         justify-content: space-between;
@@ -115,7 +104,6 @@
         width: 100%;
       }
 
-      /* セレクトボックスのデザイン */
       select {
         flex: 1;
         padding: 10px;
@@ -123,11 +111,11 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
         background-color: #1a1c20;
         color: #d1d1d1;
-        font-family: inherit; /* フォントを継承 */
+        font-family: inherit;
         font-size: 0.8em;
         cursor: pointer;
         outline: none;
-        appearance: none; /* デフォルトの矢印を消す */
+        appearance: none;
         background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>');
         background-repeat: no-repeat;
         background-position: right 10px center;
@@ -138,12 +126,11 @@
         border-color: rgba(0, 255, 255, 0.5);
       }
 
-      /* 生成ボタンのデザイン */
       button {
         padding: 10px 20px;
         border-radius: 2px;
-        border: 1px solid #ff00ff; /* マゼンタの枠線 */
-        background: transparent; /* 背景透過 */
+        border: 1px solid #ff00ff;
+        background: transparent;
         color: #ff00ff;
         font-family: inherit;
         font-weight: bold;
@@ -156,7 +143,6 @@
         overflow: hidden;
       }
 
-      /* ボタンのホバーエフェクト（塗りつぶし） */
       button:hover {
         background-color: #ff00ff;
         color: #000;
@@ -164,26 +150,23 @@
       }
 
       button:active {
-        transform: translateY(1px); /* 押した感 */
+        transform: translateY(1px);
       }
 
-      /* 進行状況メッセージ用 */
       #status-msg {
         margin-top: 30px;
         color: #555;
         font-size: 0.75em;
-        min-height: 1.2em; /* 文字がなくても高さを保つ */
+        min-height: 1.2em;
         text-transform: uppercase;
-        cursor: pointer; /* クリック可能 */
+        cursor: pointer;
       }
 
-      /* 完了時の色（ネオンミント） */
       .status-success {
         color: #00ffaa !important;
         text-shadow: 0 0 5px rgba(0, 255, 170, 0.5);
       }
 
-      /* エラー時の色（ネオンレッド） */
       .status-error {
         color: #ff4444 !important;
         text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
@@ -241,31 +224,8 @@
       const statusFile = document.getElementById("status-file");
       const statusMsg = document.getElementById("status-msg");
 
-      // --- カッコよくするためのJavaScript演出 ---
-
-      // ドラッグ中の演出 (無効)
-      // dropZone.ondragenter = (e) => {
-      //   console.log("drag enter");
-      //   e.preventDefault();
-      //   dropZone.classList.add("hover");
-      //   return false;
-      // };
-      // dropZone.ondragover = (e) => {
-      //   console.log("drag over");
-      //   e.preventDefault();
-      //   dropZone.classList.add("hover");
-      //   return false;
-      // };
-      // dropZone.ondragleave = (e) => {
-      //   console.log("drag leave");
-      //   e.preventDefault();
-      //   dropZone.classList.remove("hover");
-      //   return false;
-      // };
-
       // ファイル処理関数
       function handleFile(filePath) {
-        console.log("handleFile called with:", filePath);
         if (!filePath) return;
         const allowedExtensions = [
           ".mp3",
@@ -276,7 +236,6 @@
           ".flac",
         ];
         const fileExt = path.extname(filePath).toLowerCase();
-        console.log("file extension:", fileExt);
         if (!allowedExtensions.includes(fileExt)) {
           statusMsg.innerText = "エラー: サポートされていないファイルタイプ";
           statusMsg.className = "status-error";
@@ -292,19 +251,6 @@
         statusMsg.className = "";
       }
 
-      // ドロップ時の処理 (無効)
-      // dropZone.ondrop = (e) => {
-      //   console.log("drop event");
-      //   console.log("files length:", e.dataTransfer.files.length);
-      //   e.preventDefault();
-      //   dropZone.classList.remove("hover");
-      //   if (e.dataTransfer.files.length > 0) {
-      //     handleFile(e.dataTransfer.files[0]);
-      //   }
-      //   return false;
-      // };
-
-      dropZone.style.cursor = "pointer";
       dropZone.onclick = async () => {
         const filePath = await ipcRenderer.invoke("open-file-dialog");
         if (filePath) {
@@ -312,19 +258,7 @@
         }
       };
 
-      // 背景画像選択
-      // document.getElementById("select-bg").onclick = async () => {
-      //   const bgPath = await ipcRenderer.invoke("open-bg-dialog");
-      //   if (bgPath) {
-      //     selectedBgPath = bgPath;
-      //     statusMsg.innerText = "BG IMAGE SELECTED: " + path.basename(bgPath);
-      //     statusMsg.className = "";
-      //   }
-      // };
-
-      // 生成ボタンクリック
       document.getElementById("generate").onclick = () => {
-        console.log("generate clicked, selectedFilePath:", selectedFilePath);
         if (!selectedFilePath) {
           statusMsg.innerText = "エラー: ファイルが選択されていません";
           statusMsg.className = "status-error";
@@ -333,11 +267,24 @@
         const type = document.getElementById("type").value;
         const resolution = document.getElementById("resolution").value;
         const color = document.getElementById("color").value;
-        console.log("sending generate-video with path:", selectedFilePath, "type:", type, "resolution:", resolution, "color:", color);
-        ipcRenderer.send("generate-video", { path: selectedFilePath, type, resolution, color });
+        console.log(
+          "sending generate-video with path:",
+          selectedFilePath,
+          "type:",
+          type,
+          "resolution:",
+          resolution,
+          "color:",
+          color,
+        );
+        ipcRenderer.send("generate-video", {
+          path: selectedFilePath,
+          type,
+          resolution,
+          color,
+        });
       };
 
-      // FFmpegからの状態通知を受け取る
       ipcRenderer.on("status", (event, msg) => {
         statusMsg.innerText = msg.toUpperCase();
 
@@ -351,7 +298,6 @@
         }
       });
 
-      // 出力準備完了
       ipcRenderer.on("open-output-ready", (event, outputPath) => {
         selectedOutputPath = outputPath;
         statusMsg.onclick = () => ipcRenderer.invoke("open-output", outputPath);

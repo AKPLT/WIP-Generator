@@ -88,14 +88,12 @@ ipcMain.on("generate-video", (event, data) => {
       event.reply("status", "実行中...");
     })
     .on("error", (err, stdout, stderr) => {
-      console.error("--- FFmpeg詳細エラー ---");
       console.error("Message:", err.message);
       console.error("Stderr:", stderr);
       event.reply("status", "エラー: コンソールを確認してください");
     })
     .on("end", () => {
       event.reply("status", "成功!");
-      // どこに保存されたかメッセージで送る
       event.reply("status", `成功: ${outputPath}`);
       console.log("完了しました:", outputPath);
       event.sender.send("open-output-ready", outputPath);
