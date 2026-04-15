@@ -9,7 +9,7 @@
   "build": {
     "appId": "com.example.visualizer",
     "asar": true,
-    "asarUnpacked": [
+    "asarUnpack": [
       "node_modules/ffmpeg-static/ffmpeg",
       "node_modules/ffmpeg-static/ffmpeg.exe"
     ],
