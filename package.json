@@ -1,0 +1,28 @@
+{
+  "name": "wip-generator",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.example.visualizer",
+    "asar": true,
+    "asarUnpacked": [
+      "node_modules/ffmpeg-static/ffmpeg",
+      "node_modules/ffmpeg-static/ffmpeg.exe"
+    ],
+    "win": {
+      "target": "portable"
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  },
+  "dependencies": {
+    "electron": "^latest",
+    "ffmpeg-static": "^latest",
+    "fluent-ffmpeg": "^latest"
+  }
+}
