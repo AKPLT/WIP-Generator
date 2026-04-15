@@ -21,7 +21,7 @@
     }
   },
   "dependencies": {
-    "electron": "^latest",
+    "electron": "latest",
     "ffmpeg-static": "^latest",
     "fluent-ffmpeg": "^latest"
   }
